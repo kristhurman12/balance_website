@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A simple monthly budget tracker built around the 50/30/20 budgeting rule.">
+  <title>Balance — 50/30/20 Budget Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Balance home">
+        <span class="brand-mark">B</span>
+        <span>BALANCE<span class="brand-period">.</span></span>
+      </a>
+      <div class="sidebar-label">WORKSPACE</div>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a class="nav-link active" href="#overview"><span>◫</span> Overview</a>
+        <a class="nav-link" href="#transactions"><span>↕</span> Transactions</a>
+        <a class="nav-link" href="#budgets"><span>◉</span> Budgets</a>
+        <a class="nav-link" href="#goals"><span>◎</span> Savings goals</a>
+        <a class="nav-link" href="#debts"><span>↗</span> Debt tracker</a>
+        <a class="nav-link" href="#recurring"><span>⟳</span> Recurring bills</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="privacy-note">
+          <span class="privacy-dot"></span>
+          <div>
+            <strong>Your data stays here</strong>
+            <small>Saved in this browser</small>
+          </div>
+        </div>
+        <p class="sidebar-foot">A little more clarity.<br>A lot more control.</p>
+      </div>
+    </aside>
+
+    <main class="main-content" id="overview">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" id="today-label">YOUR FINANCIAL SNAPSHOT</p>
+          <h1>Good evening<span class="accent">.</span></h1>
+        </div>
+        <div class="topbar-actions">
+          <label class="month-picker"><span>MONTH</span><input id="monthPicker" type="month" aria-label="Choose month"></label>
+          <button class="primary-btn" id="addExpenseTop">＋ Add transaction</button>
+        </div>
+      </header>
+
+      <section class="welcome-row">
+        <div><span class="live-dot"></span><span id="monthGreeting">YOUR MONTH AT A GLANCE</span></div>
+        <p>Small steps today. More freedom tomorrow.</p>
+      </section>
+
+      <section class="summary-grid" aria-label="Monthly summary">
+        <article class="summary-card income-card">
+          <div class="card-top"><span class="card-label">MONTHLY INCOME</span><span class="card-icon">↗</span></div>
+          <div class="summary-value" id="incomeTotal">$0.00</div>
+          <button class="text-button" id="editIncomeBtn">＋ Set monthly income</button>
+        </article>
+        <article class="summary-card">
+          <div class="card-top"><span class="card-label">TOTAL SPENT</span><span class="card-icon">↘</span></div>
+          <div class="summary-value" id="spentTotal">$0.00</div>
+          <span class="card-foot" id="spentFoot">Across all categories</span>
+        </article>
+        <article class="summary-card">
+          <div class="card-top"><span class="card-label">LEFT TO ALLOCATE</span><span class="card-icon">◷</span></div>
+          <div class="summary-value" id="remainingTotal">$0.00</div>
+          <span class="card-foot">Income minus recorded spending</span>
+        </article>
+        <article class="summary-card">
+          <div class="card-top"><span class="card-label">SAVINGS TRACKED</span><span class="card-icon">✳</span></div>
+          <div class="summary-value" id="savedTotal">$0.00</div>
+          <span class="card-foot" id="savedFoot">20% target: $0.00</span>
+        </article>
+      </section>
+
+      <section class="section-block" id="budgets">
+        <div class="section-heading">
+          <div><p class="eyebrow">THE 50 / 30 / 20 METHOD</p><h2>Your budget breakdown</h2></div>
+          <span class="muted-caption">Based on your monthly take-home income</span>
+        </div>
+        <div class="budget-grid">
+          <article class="budget-card needs">
+            <div class="budget-heading"><div><span class="category-dot"></span><span>NEEDS</span></div><strong>50%</strong></div>
+            <p class="budget-amount" id="needsBudget">$0.00</p>
+            <div class="progress-track"><div class="progress-fill" id="needsProgress"></div></div>
+            <div class="budget-meta"><span id="needsSpent">$0.00 spent</span><span id="needsLeft">$0.00 left</span></div>
+            <p class="budget-description">Essentials like housing, groceries, utilities and transportation.</p>
+          </article>
+          <article class="budget-card wants">
+            <div class="budget-heading"><div><span class="category-dot"></span><span>WANTS</span></div><strong>30%</strong></div>
+            <p class="budget-amount" id="wantsBudget">$0.00</p>
+            <div class="progress-track"><div class="progress-fill" id="wantsProgress"></div></div>
+            <div class="budget-meta"><span id="wantsSpent">$0.00 spent</span><span id="wantsLeft">$0.00 left</span></div>
+            <p class="budget-description">Dining out, shopping, entertainment and the fun stuff.</p>
+          </article>
+          <article class="budget-card savings">
+            <div class="budget-heading"><div><span class="category-dot"></span><span>SAVINGS & DEBT</span></div><strong>20%</strong></div>
+            <p class="budget-amount" id="savingsBudget">$0.00</p>
+            <div class="progress-track"><div class="progress-fill" id="savingsProgress"></div></div>
+            <div class="budget-meta"><span id="savingsSpent">$0.00 allocated</span><span id="savingsLeft">$0.00 left</span></div>
+            <p class="budget-description">Emergency savings, future plans and extra debt payments.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="insights-grid">
+        <article class="panel chart-panel">
+          <div class="section-heading compact"><div><p class="eyebrow">WHERE IT GOES</p><h2>Spending breakdown</h2></div><span class="mini-tag">THIS MONTH</span></div>
+          <div class="chart-wrap"><canvas id="spendingChart" aria-label="Spending by budget category"></canvas><div class="chart-center"><strong id="chartTotal">$0</strong><span>TOTAL SPENT</span></div></div>
+          <div class="chart-legend" id="chartLegend"></div>
+        </article>
+        <article class="panel activity-panel" id="transactions">
+          <div class="section-heading compact"><div><p class="eyebrow">THE LATEST</p><h2>Recent transactions</h2></div><button class="text-button" id="addExpenseLink">＋ Add new</button></div>
+          <div id="recentTransactions" class="transaction-list"><div class="empty-state">No transactions yet. Add your first one to get started.</div></div>
+        </article>
+      </section>
+
+      <section class="section-block" id="goals">
+        <div class="section-heading"><div><p class="eyebrow">SAVE WITH PURPOSE</p><h2>Savings goals</h2></div><button class="outline-btn" id="addGoalBtn">＋ New goal</button></div>
+        <div class="goal-grid" id="goalsList"><div class="panel empty-state">Create a goal for something you're working toward.</div></div>
+      </section>
+
+      <section class="section-block" id="debts">
+        <div class="section-heading"><div><p class="eyebrow">MAKE A PLAN</p><h2>Debt tracker</h2></div><button class="outline-btn" id="addDebtBtn">＋ Add debt</button></div>
+        <div class="panel debt-panel" id="debtsList"><div class="empty-state">Add a debt to track your balance and progress.</div></div>
+      </section>
+
+      <section class="section-block" id="recurring">
+        <div class="section-heading"><div><p class="eyebrow">DON'T MISS A PAYMENT</p><h2>Recurring bills</h2></div><button class="outline-btn" id="addRecurringBtn">＋ Add recurring bill</button></div>
+        <div class="panel recurring-panel" id="recurringList"><div class="empty-state">Add rent, subscriptions or other regular payments.</div></div>
+      </section>
+
+      <section class="section-block history-section" id="history">
+        <div class="section-heading"><div><p class="eyebrow">ZOOM OUT</p><h2>Monthly history</h2></div><span class="muted-caption">Your saved month-by-month snapshot</span></div>
+        <div class="panel history-panel" id="historyList"><div class="empty-state">Your monthly snapshots will appear here as you track your budget.</div></div>
+      </section>
+      <footer>BUILT FOR BETTER MONEY HABITS <span>•</span> BALANCE.</footer>
+    </main>
+  </div>
+
+  <dialog id="transactionDialog" class="modal">
+    <form id="transactionForm" method="dialog">
+      <div class="modal-heading"><div><p class="eyebrow">MONEY IN MOTION</p><h2 id="transactionTitle">Add transaction</h2></div><button type="button" class="close-btn" data-close="transactionDialog">×</button></div>
+      <input type="hidden" id="transactionId">
+      <label>Description<input id="transactionName" type="text" placeholder="e.g. Grocery run" required maxlength="60"></label>
+      <div class="form-row"><label>Amount ($)<input id="transactionAmount" type="number" min="0.01" step="0.01" placeholder="0.00" required></label><label>Date<input id="transactionDate" type="date" required></label></div>
+      <div class="form-row"><label>Type<select id="transactionType"><option value="expense">Expense</option><option value="income">Income</option><option value="saving">Savings contribution</option><option value="debt">Debt payment</option></select></label><label>Category<select id="transactionCategory"></select></label></div>
+      <label>Notes <span class="optional">(optional)</span><input id="transactionNotes" type="text" placeholder="Add a note"></label>
+      <div class="modal-actions"><button type="button" class="outline-btn" data-close="transactionDialog">Cancel</button><button type="submit" class="primary-btn">Save transaction</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="incomeDialog" class="modal">
+    <form id="incomeForm" method="dialog">
+      <div class="modal-heading"><div><p class="eyebrow">START WITH YOUR TAKE-HOME PAY</p><h2>Monthly income</h2></div><button type="button" class="close-btn" data-close="incomeDialog">×</button></div>
+      <label>Monthly take-home income ($)<input id="incomeInput" type="number" min="0" step="0.01" placeholder="3000.00" required></label>
+      <p class="form-hint">Use the amount you actually receive after taxes and deductions.</p>
+      <div class="modal-actions"><button type="button" class="outline-btn" data-close="incomeDialog">Cancel</button><button type="submit" class="primary-btn">Save income</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="goalDialog" class="modal">
+    <form id="goalForm" method="dialog">
+      <div class="modal-heading"><div><p class="eyebrow">GIVE YOUR SAVINGS A NAME</p><h2>New savings goal</h2></div><button type="button" class="close-btn" data-close="goalDialog">×</button></div>
+      <label>Goal name<input id="goalName" type="text" placeholder="Emergency fund" required maxlength="50"></label>
+      <div class="form-row"><label>Target amount ($)<input id="goalTarget" type="number" min="0.01" step="0.01" required></label><label>Saved so far ($)<input id="goalCurrent" type="number" min="0" step="0.01" value="0"></label></div>
+      <div class="modal-actions"><button type="button" class="outline-btn" data-close="goalDialog">Cancel</button><button type="submit" class="primary-btn">Save goal</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="debtDialog" class="modal">
+    <form id="debtForm" method="dialog">
+      <div class="modal-heading"><div><p class="eyebrow">KNOW WHAT YOU OWE</p><h2>Add a debt</h2></div><button type="button" class="close-btn" data-close="debtDialog">×</button></div>
+      <label>Debt name<input id="debtName" type="text" placeholder="Credit card" required maxlength="50"></label>
+      <div class="form-row"><label>Starting balance ($)<input id="debtStart" type="number" min="0.01" step="0.01" required></label><label>Current balance ($)<input id="debtCurrent" type="number" min="0" step="0.01" required></label></div>
+      <label>APR (%) <span class="optional">(optional)</span><input id="debtApr" type="number" min="0" max="100" step="0.01" placeholder="e.g. 19.99"></label>
+      <div class="modal-actions"><button type="button" class="outline-btn" data-close="debtDialog">Cancel</button><button type="submit" class="primary-btn">Save debt</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="recurringDialog" class="modal">
+    <form id="recurringForm" method="dialog">
+      <div class="modal-heading"><div><p class="eyebrow">PLAN AHEAD</p><h2>Add recurring bill</h2></div><button type="button" class="close-btn" data-close="recurringDialog">×</button></div>
+      <label>Bill name<input id="recurringName" type="text" placeholder="Rent" required maxlength="50"></label>
+      <div class="form-row"><label>Amount ($)<input id="recurringAmount" type="number" min="0.01" step="0.01" required></label><label>Due day<input id="recurringDay" type="number" min="1" max="31" value="1" required></label></div>
+      <label>Budget category<select id="recurringCategory"><option value="needs">Needs</option><option value="wants">Wants</option><option value="savings">Savings & debt</option></select></label>
+      <div class="modal-actions"><button type="button" class="outline-btn" data-close="recurringDialog">Cancel</button><button type="submit" class="primary-btn">Save bill</button></div>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
