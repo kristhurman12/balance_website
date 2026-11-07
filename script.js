@@ -154,8 +154,75 @@ $("transactionForm").addEventListener("submit",e=>{
   addTransaction({id:$("transactionId").value||undefined,name:$("transactionName").value.trim(),amount:Number($("transactionAmount").value),date:$("transactionDate").value,type,category,budgetCategory:categoryFor(type,category),notes:$("transactionNotes").value.trim()});
   closeDialog("transactionDialog");
 });
-$("incomeForm").addEventListener("submit",e=>{e.preventDefault();monthData().income=Number($("incomeInput").value);saveState();render();closeDialog("incomeDialog");toast("Monthly income saved");});
-$("editIncomeBtn").addEventListener("click",()=>{$("incomeInput").value=monthData().income||"";openDialog("incomeDialog");});
+
+function calculateMonthlyIncome() {
+  const type = $("incomeType").value;
+  let monthlyIncome = 0;
+
+  if (type === "hourly") {
+    const rate = Number($("hourlyRate").value);
+    const hours = Number($("weeklyHours").value);
+
+    monthlyIncome = rate * hours * 52 / 12;
+  } else {
+    const amount = Number($("salaryAmount").value);
+    const frequency = $("salaryFrequency").value;
+
+    monthlyIncome = frequency === "annual"
+      ? amount / 12
+      : amount;
+  }
+
+  $("incomePreview").textContent = money(monthlyIncome);
+  return monthlyIncome;
+}
+
+$("incomeType").addEventListener("change", () => {
+  const isHourly = $("incomeType").value === "hourly";
+
+  $("hourlyFields").style.display = isHourly ? "block" : "none";
+  $("salaryFields").style.display = isHourly ? "none" : "block";
+
+  calculateMonthlyIncome();
+});
+
+[
+  "hourlyRate",
+  "weeklyHours",
+  "salaryAmount",
+  "salaryFrequency"
+].forEach(id => {
+  $(id).addEventListener("input", calculateMonthlyIncome);
+  $(id).addEventListener("change", calculateMonthlyIncome);
+});
+
+$("incomeForm").addEventListener("submit", e => {
+  e.preventDefault();
+
+  const income = calculateMonthlyIncome();
+
+  if (!Number.isFinite(income) || income <= 0) {
+    toast("Please enter a valid income amount");
+    return;
+  }
+
+  monthData().income = income;
+  saveState();
+  render();
+  closeDialog("incomeDialog");
+  toast("Monthly income saved");
+});
+
+$("editIncomeBtn").addEventListener("click", () => {
+  $("incomeForm").reset();
+  $("incomeType").value = "hourly";
+  $("hourlyFields").style.display = "block";
+  $("salaryFields").style.display = "none";
+  $("incomePreview").textContent = money(0);
+
+  openDialog("incomeDialog");
+});
+
 ["addExpenseTop","addExpenseLink"].forEach(id=>$(id).addEventListener("click",()=>showTransaction()));
 $("monthPicker").value=currentMonth();
 $("monthPicker").addEventListener("change",render);
