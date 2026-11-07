@@ -20,7 +20,8 @@
         margin:0;
         background:var(--bg);
         color:var(--text);
-        font-family:"DM Sans",sans-serif;font-size:14px
+        font-family:"DM Sans",sans-serif;
+        font-size:18px
     }
     .app-shell {
         min-height:100vh
@@ -41,7 +42,8 @@
         gap:11px;
         color:var(--text);
         text-decoration:none;
-        font:800 16px Manrope,sans-serif;letter-spacing:2px
+        font:800 16px Manrope,sans-serif;
+        letter-spacing:2px
     }
     .brand-mark {
         width:34px;
@@ -57,7 +59,7 @@
         color:var(--green)
     } 
     .sidebar-label, .eyebrow {
-        font-size:10px;
+        font-size: 14px;
         letter-spacing:1.8px;
         color:var(--muted);
         font-weight:700
@@ -77,7 +79,7 @@
         display:flex;
         gap:13px;
         align-items:center;
-        font-size:13px;
+        font-size:18px;
         transition:.2s
     }
     .nav-link span {
@@ -112,10 +114,10 @@
         display:block
     }
     .privacy-note strong {
-        font-size:11px
+        font-size:13px
     }
     .privacy-note small {
-        font-size:10px;
+        font-size:12px;
         color:var(--muted);
         margin-top:4px
     }
@@ -156,7 +158,7 @@
         display:grid;
         gap:5px;
         color:var(--muted);
-        font-size:9px;
+        font-size:12px;
         letter-spacing:1.4px;
         font-weight:700
     }
@@ -198,7 +200,7 @@
         align-items: center;
         justify-content:space-between;
         color:var(--green);
-        font-size:9px;
+        font-size:12px;
         letter-spacing:1.5px;
         font-weight:700
     }
@@ -230,7 +232,7 @@
         min-height:139px
     }
     .card-label {
-        font-size:9px;
+        font-size:12px;
         color:var(--muted);
         letter-spacing:1.3px;
         font-weight:700
@@ -251,7 +253,7 @@
         margin:16px 0 9px
     }
     .card-foot, .text-button {
-        font-size:10px;
+        font-size:12px;
         color:var(--muted)
     }
     .text-button {
@@ -278,7 +280,7 @@
         margin:6px 0 0
     }
     .muted-caption {
-        font-size:11px;
+        font-size:12px;
         color:var(--muted)
     }
     .budget-grid {
@@ -294,7 +296,7 @@
         display:flex;
         align-items:center;
         gap:9px;
-        font-size:10px;
+        font-size:12px;
         letter-spacing:1.3px;
         font-weight:700
     }
@@ -338,12 +340,12 @@
         background:var(--blue)
     }
     .budget-meta {
-        font-size:10px;
+        font-size:12px;
         color:var(--muted);
         margin-top:9px
     }
     .budget-description {
-        font-size:11px;
+        font-size:12px;
         color:#87948a;
         line-height:1.6;
         margin:17px 0 0
@@ -364,7 +366,7 @@
         font-size:17px
     }
     .mini-tag {
-        font-size:9px;
+        font-size:12px;
         letter-spacing:1px;
         color:var(--muted);
         background:#253128;
@@ -390,7 +392,7 @@
         font:700 20px Manrope
     }
     .chart-center span {
-        font-size:8px;
+        font-size:12px;
         letter-spacing:1.2px;
         color:var(--muted);margin-top:4px
     }
@@ -405,7 +407,7 @@
         display:flex;
         align-items:center;
         gap:6px;color:var(--muted);
-        font-size:10px
+        font-size:12px
     }
     .legend-swatch {
         width:7px;
@@ -444,7 +446,7 @@
         text-overflow:ellipsis
     }
     .transaction-sub {
-        font-size:10px;
+        font-size:12px;
         color:var(--muted);
         margin-top:4px
     }
@@ -462,7 +464,7 @@
         border:0;
         background:none;
         color:var(--muted);
-        font-size:9px;
+        font-size:12px;
         cursor:pointer;
         padding:0
     }
@@ -487,7 +489,7 @@
     }
     .goal-name {
         font-weight:700;
-        font-size:13px
+        font-size:15px
     }
     .goal-percent {
         color:var(--green);
@@ -497,7 +499,7 @@
         display:flex;
         justify-content:space-between;
         color:var(--muted);
-        font-size:10px;
+        font-size:12px;
         margin:18px 0 9px
     }
     .goal-actions {
@@ -530,7 +532,7 @@
         font-weight:600
     }
     .row-sub {
-        font-size:10px;
+        font-size:12px;
         color:var(--muted);
         margin-top:4px
     }
@@ -558,7 +560,7 @@
         padding:25px 12px;
         text-align:center;
         color:var(--muted);
-        font-size:11px;
+        font-size:12px;
         line-height:1.6
     }
     .history-section {
@@ -568,23 +570,23 @@
         grid-template-columns:1.1fr 1fr 1fr 1fr
     }
     .history-row.header {
-        font-size:9px;
+        font-size:12px;
         color:var(--muted);
         letter-spacing:1px;
         text-transform:uppercase
     }
     .history-row span {
-        font-size:11px;
+        font-size:12px;
         color:#b9c4bb
     }
     .history-row.header span {
-        font-size:9px;
+        font-size:12px;
         color:var(--muted)
     }
     footer {
         text-align:center;
         color:#617065;
-        font-size:9px;
+        font-size:12px;
         letter-spacing:1.6px;
         padding:20px
     }
@@ -627,7 +629,7 @@
         display:grid;
         gap:7px;
         color:#c7d2c9;
-        font-size:11px;
+        font-size:12px;
         font-weight:600;
         margin-bottom:15px
     }
@@ -637,4 +639,52 @@
         border:1px solid #354338;
         color:var(--text);
         border-radius:9px;
+    }
+    .modal form {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .modal label {
+        display: block;
+        width: 100%;
+        margin-bottom: 16px;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1.5;
+    }
+    .modal label > input,
+    .modal label > select {
+        display: block;
+        width: 100%;
+        height: 42px;
+        min-height: 42px;
+        margin-top: 7px;
+        padding: 9px 12px;
+        box-sizing: border-box;
+        font-family: inherit;
+        font-size: 14px;
+        line-height: normal;
+        border-radius: 10px;
+    }
+    .modal .form-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        width: 100%;
+    }
+    .modal .form-row label {
+        min-width: 0;
+    }
+    .modal .modal-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-top: 12px;
+    }
+    @media (max-width: 500px) {
+        .modal .form-row {
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
     }
