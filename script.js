@@ -25,9 +25,14 @@ function monthData(month=$("monthPicker").value){
   if(!state.months[month]) state.months[month]={income:0,transactions:[]};
   return state.months[month];
 }
-function categoryFor(type,category){
-  if(type==="saving"||type==="debt") return "savings";
-  return Object.entries(CATEGORIES).find(([,items])=>items.includes(category))?.[0] || "needs";
+function categoryFor(type, category){
+  if(type === "saving" || type === "debt") return "savings";
+  if(["needs", "wants", "savings"].includes(category?.toLowerCase())){
+    return category.toLowerCase();
+  }
+  return Object.entries(CATEGORIES).find(
+    ([, items]) => items.includes(category)
+  )?.[0] || "needs";
 }
 function allTransactions(month=$("monthPicker").value){return monthData(month).transactions;}
 function setCategoryOptions(selected="Housing"){
