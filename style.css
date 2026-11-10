@@ -425,8 +425,30 @@
         height:7px;
         border-radius:50%
     }
+
     .transaction-list {
-        display:grid
+        max-height: 360px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--line) transparent;
+    }
+    .transaction-list::-webkit-scrollbar {
+        width: 6px;
+    }
+    .transaction-list::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .transaction-list::-webkit-scrollbar-thumb {
+        background: var(--line);
+        border-radius: 10px;
+    }
+    .transaction-list::-webkit-scrollbar-thumb:hover {
+        background: var(--muted);
     }
     .transaction-row {
         display:grid;
