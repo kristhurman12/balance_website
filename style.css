@@ -132,7 +132,6 @@
         max-width:1700px
     }
     .topbar,
-    .topbar-actions,
     .section-heading,
     .card-top,
     .budget-heading,
@@ -150,25 +149,37 @@
     }
     .eyebrow {
         margin:0
-    }
+    } 
     .topbar-actions {
-        gap:12px
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        gap: 14px;
+        flex-shrink: 0;
     }
     .month-picker {
-        display:grid;
-        gap:5px;
-        color:var(--muted);
-        font-size:12px;
-        letter-spacing:1.4px;
-        font-weight:700
+        display: grid;
+        gap: 5px;
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 1.4px;
+        font-weight: 700;
+        min-width: 145px;
     }
     .month-picker input {
-        background:var(--panel);
-        border:1px solid var(--line);
-        color:var(--text);
-        padding:10px;
-        border-radius:9px;
-        font:500 12px "DM Sans"
+        width: 100%;
+        box-sizing: border-box;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        color: var(--text);
+        padding: 10px;
+        border-radius: 9px;
+        font: 500 12px "DM Sans";
+    }
+    .topbar-actions .primary-btn {
+        white-space: nowrap;
+        margin: 0;
+        align-self: flex-end;
     }
     .primary-btn, .outline-btn {
         border-radius:10px;
