@@ -1,12 +1,15 @@
 const $ = (id) => document.getElementById(id);
 const STORE_KEY = "balance-budget-v1";
 const CATEGORIES = {
-  needs: ["Housing","Utilities","Groceries","Transportation","Insurance","Healthcare","Minimum debt payment","Other needs"],
-  wants: ["Dining out","Shopping","Entertainment","Subscriptions","Hobbies","Travel","Personal care","Other wants"],
-  savings: ["Emergency fund","Savings","Investments","Extra debt payment","Other savings"]
+  needs: ["Housing","Utilities","Groceries","Transportation",
+    "Insurance","Healthcare","Minimum debt payment","Other needs"],
+  wants: ["Dining out","Shopping","Entertainment","Subscriptions",
+    "Hobbies","Travel","Personal care","Other wants"],
+  savings: ["Emergency fund","Savings","Investments",
+    "Extra debt payment","Other savings"]
 };
 const COLORS = {needs:"#9bc7a5",wants:"#d2b77b",savings:"#91a9cf"};
-const LABELS = {needs:"Needs",wants:"Wants",savings:"Savings & debt"};
+const LABELS = {needs:"Needs",wants:"Wants",savings:"Savings"};
 const money = n => new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(Number(n)||0);
 const todayISO = () => new Date().toISOString().slice(0,10);
 const currentMonth = () => todayISO().slice(0,7);
@@ -54,6 +57,35 @@ function getTotals(){
   });
   return {income:data.income,spent:totals.needs+totals.wants+totals.savings,totals};
 }
+function calculateBudgetPercentages() {
+  const result = getTotals();
+  const income = Number(result.income) || 0;
+
+  if (income <= 0) {
+    return {
+      needs: 0,
+      wants: 0,
+      savings: 0
+    };
+  }
+
+  return {
+    needs: (result.totals.needs / income) * 100,
+    wants: (result.totals.wants / income) * 100,
+    savings: (result.totals.savings / income) * 100
+  };
+}
+const percentages = calculateBudgetPercentages();
+
+console.log(percentages.needs);
+console.log(percentages.wants);
+console.log(percentages.savings);
+
+const budgetTargets = {
+  needs: 50,
+  wants: 30,
+  savings: 20
+};
 function render(){
   const month=$("monthPicker").value; const {income,spent,totals}=getTotals();
   const budgets={needs:income*.5,wants:income*.3,savings:income*.2};
@@ -88,7 +120,56 @@ function renderChart(totals){
   $("chartTotal").textContent=money(values.reduce((a,b)=>a+b,0));
   $("chartLegend").innerHTML=Object.keys(LABELS).map(k=>`<span class="legend-item"><i class="legend-swatch" style="background:${COLORS[k]}"></i>${LABELS[k]}</span>`).join("");
   if(chart) chart.destroy();
-  chart=new Chart($("spendingChart"),{type:"doughnut",data:{labels:Object.values(LABELS),datasets:[{data:values,backgroundColor:Object.values(COLORS),borderColor:"#171e19",borderWidth:5,hoverOffset:5}]},options:{responsive:true,maintainAspectRatio:false,cutout:"76%",plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.label}: ${money(c.raw)}`}}}}});
+  
+  const percentages = calculateBudgetPercentages();
+
+  const targets = {
+    needs: 50,
+    wants: 30,
+    savings: 20
+  };
+
+  chart = new Chart($("spendingChart"), {
+    type: "doughnut",
+    data: {
+      labels: Object.values(LABELS),
+      datasets: [{
+        data: values,
+        backgroundColor: Object.values(COLORS),
+        borderColor: "#171e19",
+        borderWidth: 5,
+        hoverOffset: 5
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: "76%",
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          callbacks: {
+            label: c => {
+              const keys = ["needs", "wants", "savings"];
+              const key = keys[c.dataIndex];
+
+              const spent = Number(c.raw) || 0;
+              const actual = percentages[key] || 0;
+              const target = targets[key];
+
+              return [
+                `${c.label}: ${money(spent)}`,
+                `${actual.toFixed(1)}% of monthly income`,
+                `Budget target: ${target}%`
+              ];
+            }
+          }
+        }
+      }
+    }
+  });
 }
 function renderGoals(){
   const root=$("goalsList");
