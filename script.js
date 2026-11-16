@@ -106,7 +106,7 @@ function render(){
   renderTransactions(); renderChart(totals); renderGoals(); renderDebts(); renderRecurring(); renderHistory();
 }
 function renderTransactions(){
-  const items=[...allTransactions()].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,6);
+  const items=[...allTransactions()].sort((a,b)=>b.date.localeCompare(a.date));
   const root=$("recentTransactions");
   if(!items.length){root.innerHTML='<div class="empty-state">No transactions yet. Add your first one to get started.</div>';return;}
   root.innerHTML=items.map(t=>{
@@ -192,15 +192,48 @@ function renderRecurring(){
   if(!state.recurring.length){root.innerHTML='<div class="empty-state">Add rent, subscriptions or other regular payments.</div>';return;}
   root.innerHTML=state.recurring.map(r=>`<div class="recurring-row"><div><div class="row-title">${escapeHTML(r.name)}</div><div class="row-sub">${LABELS[r.category]} · Due day ${r.day}</div></div><div class="row-value">${money(r.amount)} / month</div><div class="row-sub">Monthly</div><div class="row-actions"><button class="tiny-action" data-log-bill="${r.id}">＋ Log payment</button><button class="tiny-action" data-delete-bill="${r.id}">Delete</button></div></div>`).join("");
 }
+
 function renderHistory(){
-  const root=$("historyList");
-  const months=Object.keys(state.months).sort().reverse();
-  if(!months.length){root.innerHTML='<div class="empty-state">Your monthly snapshots will appear here as you track your budget.</div>';return;}
-  root.innerHTML=`<div class="history-row header"><span>Month</span><span>Income</span><span>Spent</span><span>Saved / debt</span></div>`+months.map(m=>{
-    const d=state.months[m], spent=d.transactions.filter(t=>t.type!=="income").reduce((s,t)=>s+Number(t.amount),0);
-    const saved=d.transactions.filter(t=>t.type==="saving"||t.type==="debt").reduce((s,t)=>s+Number(t.amount),0);
-    return `<div class="history-row"><span>${monthLabel(m)}</span><span>${money(d.income)}</span><span>${money(spent)}</span><span>${money(saved)}</span></div>`;
-  }).join("");
+  const root = $("historyList");
+  const months = Object.keys(state.months).sort().reverse();
+
+  if(!months.length){
+    root.innerHTML = '<div class="empty-state">Your monthly snapshots will appear here as you track your budget.</div>';
+    return;
+  }
+
+  root.innerHTML =
+    `<div class="history-row header">
+      <span>Month</span>
+      <span>Income</span>
+      <span>Spent</span>
+      <span>Saved / debt</span>
+      <span>Report</span>
+    </div>` +
+
+    months.map(m => {
+      const d = state.months[m];
+      const spent = d.transactions
+        .filter(t => t.type !== "income")
+        .reduce((s,t) => s + Number(t.amount), 0);
+
+      const saved = d.transactions
+        .filter(t => t.type === "saving" || t.type === "debt")
+        .reduce((s,t) => s + Number(t.amount), 0);
+
+      return `
+        <div class="history-row">
+          <span>${monthLabel(m)}</span>
+          <span>${money(d.income)}</span>
+          <span>${money(spent)}</span>
+          <span>${money(saved)}</span>
+          <span>
+            <button class="tiny-action" data-download-month="${m}">
+              ↓ Download
+            </button>
+          </span>
+        </div>`;
+    }).join("");
 }
 function formatDate(date){return new Date(date+"T12:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric"});}
 function escapeHTML(value){return String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
@@ -316,6 +349,10 @@ $("addRecurringBtn").addEventListener("click",()=>{$("recurringForm").reset();op
 $("recurringForm").addEventListener("submit",e=>{e.preventDefault();state.recurring.push({id:makeId(),name:$("recurringName").value.trim(),amount:Number($("recurringAmount").value),day:Number($("recurringDay").value),category:$("recurringCategory").value});saveState();render();closeDialog("recurringDialog");toast("Recurring bill saved");});
 document.addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;
+  if(b.dataset.downloadMonth) {
+  downloadMonthlyReport(b.dataset.downloadMonth);
+  return;
+}
   if(b.dataset.close){closeDialog(b.dataset.close);return;}
   if(b.dataset.editTx){const t=allTransactions().find(x=>x.id===b.dataset.editTx);if(t)showTransaction(t);}
   if(b.dataset.deleteTx){const d=allTransactions();const i=d.findIndex(x=>x.id===b.dataset.deleteTx);if(i>=0)d.splice(i,1);saveState();render();toast("Transaction deleted");}
@@ -326,4 +363,70 @@ document.addEventListener("click",e=>{
   if(b.dataset.deleteBill){state.recurring=state.recurring.filter(x=>x.id!==b.dataset.deleteBill);saveState();render();}
   if(b.dataset.logBill){const r=state.recurring.find(x=>x.id===b.dataset.logBill);addTransaction({name:r.name,amount:r.amount,date:todayISO(),type:"expense",category:r.name,budgetCategory:r.category});}
 });
+
+
+function downloadMonthlyReport(month) {
+  const data = state.months[month];
+
+  if (!data) return;
+
+  const transactions = [...data.transactions]
+    .sort((a, b) => a.date.localeCompare(b.date));
+
+  const totals = { needs: 0, wants: 0, savings: 0 };
+
+  transactions.forEach(t => {
+    if (t.type === "income") return;
+
+    const group = categoryFor(t.type, t.category);
+    totals[group] += Number(t.amount) || 0;
+  });
+
+  const rows = [
+    ["BALANCE - MONTHLY FINANCIAL REPORT"],
+    ["Month", monthLabel(month)],
+    ["Monthly Income", data.income],
+    ["Needs Total", totals.needs],
+    ["Wants Total", totals.wants],
+    ["Savings Total", totals.savings],
+    [],
+    ["Date", "Description", "Type", "Category", "Budget Group", "Amount", "Notes"]
+  ];
+
+  transactions.forEach(t => {
+    rows.push([
+      t.date,
+      t.name,
+      t.type,
+      t.category || "",
+      t.type === "income" ? "Income" : LABELS[categoryFor(t.type, t.category)],
+      Number(t.amount) || 0,
+      t.notes || ""
+    ]);
+  });
+
+  const csv = rows.map(row =>
+    row.map(value => `"${String(value ?? "").replace(/"/g, '""')}"`).join(",")
+  ).join("\r\n");
+
+  const blob = new Blob(["\uFEFF" + csv], {
+    type: "text/csv;charset=utf-8;"
+  });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = `Balance-${month}-Financial-Report.csv`;
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+  toast(`${monthLabel(month)} report downloaded`);
+}
+
+$("downloadReportBtn").addEventListener("click", downloadMonthlyReport);
 render();

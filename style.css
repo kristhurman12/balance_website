@@ -1,91 +1,92 @@
 *{box-sizing:border-box} :root {
-    --bg:#101411;
-    --panel:#171e19;
-    --panel2:#1c251f;
-    --line:#29352d;
-    --text:#f1f5f0;
-    --muted:#8e9c91;
-    --green:#9bc7a5;
-    --green2:#6fa77d;
-    --gold:#d2b77b;
-    --blue:#91a9cf;
-    --red:#d88787;
-    --radius:18px 
+    --bg: #101411;
+    --panel: #171e19;
+    --panel2: #1c251f;
+    --line: #29352d;
+    --text: #f1f5f0;
+    --muted: #8e9c91;
+    --green: #9bc7a5;
+    --green2: #6fa77d;
+    --gold: #d2b77b;
+    --blue: #91a9cf;
+    --red: #d88787;
+    --radius: 18px 
 }
     html {
-        scroll-behavior:smooth;
-        scroll-padding-top:28px
+        scroll-behavior: smooth;
+        scroll-padding-top: 28px;
     }
     body {
-        margin:0;
-        background:var(--bg);
-        color:var(--text);
-        font-family:"DM Sans",sans-serif;
-        font-size:18px
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "DM Sans",sans-serif;
+        font-size: 18px;
     }
     .app-shell {
-        min-height:100vh
+        min-height: 100vh
     }
     .sidebar {
-        width:244px;
-        position:fixed;
-        inset:0 auto 0 0;
-        background:#131a15;
-        border-right:1px solid var(--line);
-        padding:30px 20px;
-        display:flex;
-        flex-direction:column;
-        z-index:5 }
+        width: 244px;
+        position: fixed;
+        inset: 0 auto 0 0;
+        background: #131a15;
+        border-right: 1px solid var(--line);
+        padding: 30px 20px;
+        display: flex;
+        flex-direction: column;
+        z-index: 5;
+    }
     .brand {
-        display:flex;
-        align-items:center;
-        gap:11px;
-        color:var(--text);
-        text-decoration:none;
-        font:800 16px Manrope,sans-serif;
-        letter-spacing:2px
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        color: var(--text);
+        text-decoration: none;
+        font: 800 16px Manrope, sans-serif;
+        letter-spacing: 2px;
     }
     .brand-mark {
-        width:34px;
-        height:34px;
-        display:grid;
-        place-items:center;
-        background:var(--green);
-        color:#142017;
-        border-radius:11px;
-        font:800 19px Manrope
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        background: var(--green);
+        color: #142017;
+        border-radius: 11px;
+        font: 800 19px Manrope;
     }
     .brand-period, .accent {
-        color:var(--green)
+        color: var(--green);
     } 
     .sidebar-label, .eyebrow {
         font-size: 14px;
-        letter-spacing:1.8px;
-        color:var(--muted);
-        font-weight:700
+        letter-spacing: 1.8px;
+        color:  var(--muted);
+        font-weight: 700;
     } 
     .sidebar-label {
-        margin:52px 0 15px 10px
+        margin: 52px 0 15px 10px;
     }
     .nav-links {
-        display:grid;
-        gap:7px
+        display: grid;
+        gap: 7px;
     }
     .nav-link {
-        padding:12px 13px;
-        border-radius:10px;
-        color:#aab5ac;
-        text-decoration:none;
-        display:flex;
-        gap:13px;
-        align-items:center;
-        font-size:18px;
-        transition:.2s
+        padding: 12px 13px;
+        border-radius: 10px;
+        color: #aab5ac;
+        text-decoration: none;
+        display: flex;
+        gap: 13px;
+        align-items: center;
+        font-size: 18px;
+        transition: .2s;
     }
     .nav-link span {
-        font-size:18px;
-        width:18px;
-        text-align:center
+        font-size: 18px;
+        width: 18px;
+        text-align: center;
     }
     .nav-link:hover, .nav-link.active {
         background:#26342a;
@@ -425,7 +426,6 @@
         height:7px;
         border-radius:50%
     }
-
     .transaction-list {
         max-height: 360px;
         overflow-y: auto;
@@ -451,6 +451,7 @@
         background: var(--muted);
     }
     .transaction-row {
+        flex: 0 0 auto;
         display:grid;
         grid-template-columns:36px minmax(0,1fr) auto;
         align-items:center;
@@ -715,6 +716,25 @@
         gap: 12px;
         margin-top: 12px;
     }
+
+    .history-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    }
+
+    @media (max-width: 650px) {
+    .history-section .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 16px;
+        }
+
+        .history-actions {
+            flex-wrap: wrap;
+        }
+    }
+
     @media (max-width: 500px) {
         .modal .form-row {
             grid-template-columns: 1fr;

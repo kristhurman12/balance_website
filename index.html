@@ -137,14 +137,29 @@
         <div class="panel recurring-panel" id="recurringList"><div class="empty-state">Add rent, subscriptions or other regular payments.</div></div>
       </section>
 
+      
       <section class="section-block history-section" id="history">
-        <div class="section-heading"><div><p class="eyebrow">ZOOM OUT</p><h2>Monthly history</h2></div><span class="muted-caption">Your saved month-by-month snapshot</span></div>
-        <div class="panel history-panel" id="historyList"><div class="empty-state">Your monthly snapshots will appear here as you track your budget.</div></div>
-      </section>
-      <footer>BUILT FOR BETTER MONEY HABITS <span>•</span> BALANCE.</footer>
-    </main>
-  </div>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">ZOOM OUT</p>
+            <h2>Monthly history</h2>
+          </div>
 
+          <div class="history-actions">
+            <span class="muted-caption">Your saved month-by-month snapshot</span>
+            <button class="outline-btn" id="downloadReportBtn">
+              ↓ Download report
+            </button>
+          </div>
+        </div>
+
+        <div class="panel history-panel" id="historyList">
+          <div class="empty-state">
+            Your monthly snapshots will appear here as you track your budget.
+          </div>
+        </div>
+      </section>
+      
   <dialog id="transactionDialog" class="modal">
     <form id="transactionForm" method="dialog">
       <div class="modal-heading"><div><p class="eyebrow">MONEY IN MOTION</p><h2 id="transactionTitle">Add transaction</h2></div><button type="button" class="close-btn" data-close="transactionDialog">×</button></div>
@@ -239,7 +254,7 @@
       <div class="modal-heading"><div><p class="eyebrow">PLAN AHEAD</p><h2>Add recurring bill</h2></div><button type="button" class="close-btn" data-close="recurringDialog">×</button></div>
       <label>Bill name<input id="recurringName" type="text" placeholder="Rent" required maxlength="50"></label>
       <div class="form-row"><label>Amount ($)<input id="recurringAmount" type="number" min="0.01" step="0.01" required></label><label>Due day<input id="recurringDay" type="number" min="1" max="31" value="1" required></label></div>
-      <label>Budget category<select id="recurringCategory"><option value="needs">Needs</option><option value="wants">Wants</option><option value="savings">Savings & debt</option></select></label>
+      <label>Budget category<select id="recurringCategory"><option value="needs">Needs</option><option value="wants">Wants</option><option value="savings">Savings</option></select></label>
       <div class="modal-actions"><button type="button" class="outline-btn" data-close="recurringDialog">Cancel</button><button type="submit" class="primary-btn">Save bill</button></div>
     </form>
   </dialog>
