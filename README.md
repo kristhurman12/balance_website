@@ -1,9 +1,9 @@
 
-# Balance — Monthly Budget Tracker
+# BalanceBug — Monthly Budget Tracker
 
 > Take control of your money. Build better financial habits.
 
-Balance is a personal monthly budget tracker designed to help users manage their finances using the **50/30/20 budgeting rule**. The goal is to make budgeting simple, organized, and accessible while helping users understand where their money goes.
+BalanceBug is a personal monthly budget tracker designed to help users manage their finances using the **50/30/20 budgeting rule**. The goal is to make budgeting simple, organized, and accessible while helping users understand where their money goes.
 
 ---
 
@@ -15,9 +15,9 @@ The 50/30/20 budgeting method divides monthly after-tax income into three catego
 |:---|:---:|:---|
 | Needs | 50% | Essential expenses such as rent, groceries, and utilities. |
 | Wants | 30% | Nonessential spending such as entertainment, shopping, and dining. |
-| Savings & Debt | 20% | Savings contributions, emergency funds, and debt payments. |
+| Savings | 20% | Savings contributions, emergency funds, and debt payments. |
 
-Balance helps users visualize these categories, track spending, and stay within their monthly financial goals.
+BalanceBug helps users visualize these categories, track spending, and stay within their monthly financial goals.
 
 ## Features
 
