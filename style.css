@@ -720,6 +720,26 @@
     align-items: center;
     gap: 20px;
     }
+    
+    .nav-link span,
+    .card-icon,
+    .transaction-icon {
+        font-family: Arial, Helvetica, sans-serif;
+        font-variant-emoji: text;
+        font-weight: 400;
+    }
+    .month-picker input {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 145px;
+        height: 38px;
+        min-height: 38px;
+        padding: 8px 10px;
+        font-family: "DM Sans", Arial, sans-serif;
+        font-size: 14px;
+        line-height: normal;
+        border-radius: 9px;
+    }
 
     @media (max-width: 650px) {
     .history-section .section-heading {
@@ -740,495 +760,510 @@
         }
     }
 
+    @media (max-width: 600px) {
+        .month-picker {
+            min-width: 0;
+            width: 145px;
+            font-size: 11px;
+        }
 
-html,
-body {
-    max-width: 100%;
-    overflow-x: hidden;
-}
-
-.app-shell,
-.main-content,
-section,
-.panel,
-.summary-card,
-.budget-card {
-    min-width: 0;
-}
-
-@media (max-width: 900px) {
-    .sidebar {
-        position: sticky;
-        top: 0;
-        left: auto;
-        right: auto;
-        bottom: auto;
-        width: 100%;
-        height: auto;
-        min-height: 0;
-        padding: 15px 22px 12px;
-        border-right: 0;
-        border-bottom: 1px solid var(--line);
-        z-index: 20;
+        .month-picker input {
+            width: 145px;
+            height: 36px;
+            min-height: 36px;
+            font-size: 14px;
+            padding: 7px 9px;
+        }
     }
 
-    .sidebar-label,
-    .sidebar-bottom {
-        display: none;
-    }
-
-    .brand {
-        margin-bottom: 13px;
-    }
-
-    .nav-links {
-        display: flex;
-        gap: 7px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        padding-bottom: 3px;
-        scrollbar-width: thin;
-        scrollbar-color: var(--line) transparent;
-    }
-
-    .nav-link {
-        flex: 0 0 auto;
-        white-space: nowrap;
-        padding: 10px 12px;
-        font-size: 14px;
-    }
-
-    .main-content {
-        margin-left: 0;
-        width: 100%;
-        padding: 28px 24px;
-    }
-
-    .summary-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .budget-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .insights-grid {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
-    .goal-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (max-width: 600px) {
+    html,
     body {
-        font-size: 16px;
+        max-width: 100%;
+        overflow-x: hidden;
     }
 
-    .sidebar {
-        padding: 13px 15px 10px;
-    }
-
-    .brand {
-        gap: 9px;
-        font-size: 14px;
-        letter-spacing: 1.5px;
-        margin-bottom: 11px;
-    }
-
-    .brand-logo {
-        width: 34px;
-        height: 34px;
-    }
-
-    .nav-links {
-        margin-right: -15px;
-        padding-right: 15px;
-    }
-
-    .nav-link {
-        font-size: 12px;
-        padding: 9px 10px;
-        gap: 7px;
-    }
-
-    .nav-link span {
-        font-size: 14px;
-        width: auto;
-    }
-
-    .main-content {
-        padding: 23px 15px 30px;
-    }
-
-    .topbar {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 17px;
-    }
-
-    .topbar h1 {
-        font-size: 27px;
-    }
-
-    .topbar-actions {
-        width: 100%;
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
-        align-items: end;
-        gap: 10px;
-    }
-
-    .month-picker {
-        min-width: 0;
-        width: 100%;
-    }
-
-    .month-picker input {
-        min-width: 0;
-        height: 42px;
-        font-size: 13px;
-    }
-
-    .topbar-actions .primary-btn {
-        width: 100%;
-        min-height: 42px;
-        padding: 10px 8px;
-        font-size: 12px;
-        white-space: normal;
-    }
-
-    .welcome-row {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 7px;
-        margin: 25px 0 15px;
-        font-size: 11px;
-        letter-spacing: 1.1px;
-    }
-
-    .welcome-row p {
-        margin: 0;
-        font-size: 12px;
-    }
-
-    .summary-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-    }
-
-    .summary-card {
-        min-height: 125px;
-        padding: 14px 12px;
-        border-radius: 14px;
-    }
-
-    .card-label {
-        font-size: 10px;
-        letter-spacing: .8px;
-    }
-
-    .card-icon {
-        width: 24px;
-        height: 24px;
-        font-size: 14px;
-    }
-
-    .summary-value {
-        font-size: clamp(18px, 5vw, 23px);
-        margin: 14px 0 8px;
-        overflow-wrap: anywhere;
-    }
-
-    .card-foot,
-    .text-button {
-        font-size: 11px;
-        line-height: 1.4;
-    }
-
-    .section-block {
-        margin-top: 32px;
-    }
-
-    .section-heading {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 11px;
-        margin-bottom: 14px;
-    }
-
-    .section-heading h2 {
-        font-size: 19px;
-    }
-
-    .section-heading > .muted-caption {
-        line-height: 1.5;
-    }
-
-    .budget-grid {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 11px;
-    }
-
+    .app-shell,
+    .main-content,
+    section,
+    .panel,
+    .summary-card,
     .budget-card {
-        padding: 17px;
-    }
-
-    .budget-amount {
-        font-size: 24px;
-        margin: 14px 0 12px;
-    }
-
-    .budget-meta {
-        gap: 8px;
-        font-size: 11px;
-    }
-
-    .budget-description {
-        margin-top: 13px;
-        font-size: 12px;
-    }
-
-    .insights-grid {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 12px;
-        margin-top: 15px;
-    }
-
-    .panel {
-        padding: 16px;
-        border-radius: 15px;
-    }
-
-    .compact {
-        align-items: center;
-        flex-direction: row;
-        gap: 8px;
-    }
-
-    .compact h2 {
-        font-size: 16px;
-    }
-
-    .mini-tag {
-        font-size: 10px;
-        white-space: nowrap;
-    }
-
-    .chart-wrap {
-        width: 100%;
-        max-width: 240px;
-        height: 205px;
-    }
-
-    .chart-center strong {
-        font-size: 19px;
-    }
-
-    .chart-legend {
-        gap: 12px;
-    }
-
-    .transaction-list {
-        max-height: 320px;
-        padding-right: 2px;
-    }
-
-    .transaction-row {
-        grid-template-columns: 32px minmax(0, 1fr) auto;
-        gap: 8px;
-    }
-
-    .transaction-name,
-    .transaction-sub,
-    .transaction-amount {
-        font-size: 11px;
-    }
-
-    .transaction-actions {
-        gap: 7px;
-    }
-
-    .tiny-action {
-        font-size: 11px;
-        min-height: 26px;
-    }
-
-    .goal-grid {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 11px;
-    }
-
-    .goal-card {
-        padding: 16px;
-    }
-
-    .debt-panel,
-    .recurring-panel,
-    .history-panel {
-        padding: 0 14px;
-    }
-
-    .debt-row,
-    .recurring-row {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        gap: 10px;
-        padding: 15px 0;
-    }
-
-    .debt-row > *,
-    .recurring-row > * {
         min-width: 0;
-        overflow-wrap: anywhere;
     }
 
-    .row-actions {
-        grid-column: 1 / -1;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        gap: 15px;
+    @media (max-width: 900px) {
+        .sidebar {
+            position: sticky;
+            top: 0;
+            left: auto;
+            right: auto;
+            bottom: auto;
+            width: 100%;
+            height: auto;
+            min-height: 0;
+            padding: 15px 22px 12px;
+            border-right: 0;
+            border-bottom: 1px solid var(--line);
+            z-index: 20;
+        }
+
+        .sidebar-label,
+        .sidebar-bottom {
+            display: none;
+        }
+
+        .brand {
+            margin-bottom: 13px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 7px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding-bottom: 3px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--line) transparent;
+        }
+
+        .nav-link {
+            flex: 0 0 auto;
+            white-space: nowrap;
+            padding: 10px 12px;
+            font-size: 14px;
+        }
+
+        .main-content {
+            margin-left: 0;
+            width: 100%;
+            padding: 28px 24px;
+        }
+
+        .summary-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .budget-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .insights-grid {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .goal-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
     }
 
-    .history-row,
-    .history-row.header {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 9px 12px;
-        padding: 14px 0;
+    @media (max-width: 600px) {
+        body {
+            font-size: 16px;
+        }
+
+        .sidebar {
+            padding: 13px 15px 10px;
+        }
+
+        .brand {
+            gap: 9px;
+            font-size: 14px;
+            letter-spacing: 1.5px;
+            margin-bottom: 11px;
+        }
+
+        .brand-logo {
+            width: 34px;
+            height: 34px;
+        }
+
+        .nav-links {
+            margin-right: -15px;
+            padding-right: 15px;
+        }
+
+        .nav-link {
+            font-size: 12px;
+            padding: 9px 10px;
+            gap: 7px;
+        }
+
+        .nav-link span {
+            font-size: 14px;
+            width: auto;
+        }
+
+        .main-content {
+            padding: 23px 15px 30px;
+        }
+
+        .topbar {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 17px;
+        }
+
+        .topbar h1 {
+            font-size: 27px;
+        }
+
+        .topbar-actions {
+            width: 100%;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+            align-items: end;
+            gap: 10px;
+        }
+
+        .month-picker {
+            min-width: 0;
+            width: 100%;
+        }
+
+        .month-picker input {
+            min-width: 0;
+            height: 42px;
+            font-size: 13px;
+        }
+
+        .topbar-actions .primary-btn {
+            width: 100%;
+            min-height: 42px;
+            padding: 10px 8px;
+            font-size: 12px;
+            white-space: normal;
+        }
+
+        .welcome-row {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 7px;
+            margin: 25px 0 15px;
+            font-size: 11px;
+            letter-spacing: 1.1px;
+        }
+
+        .welcome-row p {
+            margin: 0;
+            font-size: 12px;
+        }
+
+        .summary-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .summary-card {
+            min-height: 125px;
+            padding: 14px 12px;
+            border-radius: 14px;
+        }
+
+        .card-label {
+            font-size: 10px;
+            letter-spacing: .8px;
+        }
+
+        .card-icon {
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+        }
+
+        .summary-value {
+            font-size: clamp(18px, 5vw, 23px);
+            margin: 14px 0 8px;
+            overflow-wrap: anywhere;
+        }
+
+        .card-foot,
+        .text-button {
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        .section-block {
+            margin-top: 32px;
+        }
+
+        .section-heading {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 11px;
+            margin-bottom: 14px;
+        }
+
+        .section-heading h2 {
+            font-size: 19px;
+        }
+
+        .section-heading > .muted-caption {
+            line-height: 1.5;
+        }
+
+        .budget-grid {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 11px;
+        }
+
+        .budget-card {
+            padding: 17px;
+        }
+
+        .budget-amount {
+            font-size: 24px;
+            margin: 14px 0 12px;
+        }
+
+        .budget-meta {
+            gap: 8px;
+            font-size: 11px;
+        }
+
+        .budget-description {
+            margin-top: 13px;
+            font-size: 12px;
+        }
+
+        .insights-grid {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .panel {
+            padding: 16px;
+            border-radius: 15px;
+        }
+
+        .compact {
+            align-items: center;
+            flex-direction: row;
+            gap: 8px;
+        }
+
+        .compact h2 {
+            font-size: 16px;
+        }
+
+        .mini-tag {
+            font-size: 10px;
+            white-space: nowrap;
+        }
+
+        .chart-wrap {
+            width: 100%;
+            max-width: 240px;
+            height: 205px;
+        }
+
+        .chart-center strong {
+            font-size: 19px;
+        }
+
+        .chart-legend {
+            gap: 12px;
+        }
+
+        .transaction-list {
+            max-height: 320px;
+            padding-right: 2px;
+        }
+
+        .transaction-row {
+            grid-template-columns: 32px minmax(0, 1fr) auto;
+            gap: 8px;
+        }
+
+        .transaction-name,
+        .transaction-sub,
+        .transaction-amount {
+            font-size: 11px;
+        }
+
+        .transaction-actions {
+            gap: 7px;
+        }
+
+        .tiny-action {
+            font-size: 11px;
+            min-height: 26px;
+        }
+
+        .goal-grid {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 11px;
+        }
+
+        .goal-card {
+            padding: 16px;
+        }
+
+        .debt-panel,
+        .recurring-panel,
+        .history-panel {
+            padding: 0 14px;
+        }
+
+        .debt-row,
+        .recurring-row {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 10px;
+            padding: 15px 0;
+        }
+
+        .debt-row > *,
+        .recurring-row > * {
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .row-actions {
+            grid-column: 1 / -1;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .history-row,
+        .history-row.header {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 9px 12px;
+            padding: 14px 0;
+        }
+
+        .history-row.header {
+            display: none;
+        }
+
+        .history-row > span {
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .history-row > span:nth-child(1)::before {
+            content: "Month";
+        }
+
+        .history-row > span:nth-child(2)::before {
+            content: "Income";
+        }
+
+        .history-row > span:nth-child(3)::before {
+            content: "Spent";
+        }
+
+        .history-row > span:nth-child(4)::before {
+            content: "Saved / debt";
+        }
+
+        .history-row > span:nth-child(5) {
+            grid-column: 1 / -1;
+        }
+
+        .history-row > span::before {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--muted);
+            font-size: 10px;
+            letter-spacing: .7px;
+            text-transform: uppercase;
+        }
+
+        .history-row > span:last-child .tiny-action {
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        .history-section .section-heading {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .history-actions {
+            gap: 8px;
+        }
+
+        .modal {
+            width: calc(100% - 24px);
+            max-height: 88vh;
+            overflow-y: auto;
+            padding: 19px 16px;
+            border-radius: 15px;
+        }
+
+        .modal-heading {
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .modal-heading h2 {
+            font-size: 19px;
+        }
+
+        .modal .form-row {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 0;
+        }
+
+        .modal .modal-actions {
+            flex-direction: column-reverse;
+            align-items: stretch;
+        }
+
+        .modal .modal-actions button {
+            width: 100%;
+            min-height: 42px;
+        }
     }
 
-    .history-row.header {
-        display: none;
+    @media (max-width: 380px) {
+        .main-content {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+
+        .summary-card {
+            padding: 12px 10px;
+        }
+
+        .card-label {
+            font-size: 9px;
+        }
+
+        .summary-value {
+            font-size: 18px;
+        }
+
+        .topbar-actions {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .topbar-actions .primary-btn {
+            min-height: 40px;
+        }
+
+        .debt-row,
+        .recurring-row,
+        .history-row {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .history-row > span:nth-child(5) {
+            grid-column: auto;
+        }
     }
 
-    .history-row > span {
-        min-width: 0;
-        overflow-wrap: anywhere;
-    }
+    @media (max-width: 600px) {
+        button,
+        .nav-link,
+        input,
+        select {
+            touch-action: manipulation;
+        }
 
-    .history-row > span:nth-child(1)::before {
-        content: "Month";
+        .modal input,
+        .modal select {
+            font-size: 16px;
+        }
     }
-
-    .history-row > span:nth-child(2)::before {
-        content: "Income";
-    }
-
-    .history-row > span:nth-child(3)::before {
-        content: "Spent";
-    }
-
-    .history-row > span:nth-child(4)::before {
-        content: "Saved / debt";
-    }
-
-    .history-row > span:nth-child(5) {
-        grid-column: 1 / -1;
-    }
-
-    .history-row > span::before {
-        display: block;
-        margin-bottom: 4px;
-        color: var(--muted);
-        font-size: 10px;
-        letter-spacing: .7px;
-        text-transform: uppercase;
-    }
-
-    .history-row > span:last-child .tiny-action {
-        color: var(--green);
-        font-weight: 700;
-    }
-
-    .history-section .section-heading {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .history-actions {
-        gap: 8px;
-    }
-
-    .modal {
-        width: calc(100% - 24px);
-        max-height: 88vh;
-        overflow-y: auto;
-        padding: 19px 16px;
-        border-radius: 15px;
-    }
-
-    .modal-heading {
-        gap: 12px;
-        margin-bottom: 18px;
-    }
-
-    .modal-heading h2 {
-        font-size: 19px;
-    }
-
-    .modal .form-row {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 0;
-    }
-
-    .modal .modal-actions {
-        flex-direction: column-reverse;
-        align-items: stretch;
-    }
-
-    .modal .modal-actions button {
-        width: 100%;
-        min-height: 42px;
-    }
-}
-
-@media (max-width: 380px) {
-    .main-content {
-        padding-left: 12px;
-        padding-right: 12px;
-    }
-
-    .summary-card {
-        padding: 12px 10px;
-    }
-
-    .card-label {
-        font-size: 9px;
-    }
-
-    .summary-value {
-        font-size: 18px;
-    }
-
-    .topbar-actions {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
-    .topbar-actions .primary-btn {
-        min-height: 40px;
-    }
-
-    .debt-row,
-    .recurring-row,
-    .history-row {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
-    .history-row > span:nth-child(5) {
-        grid-column: auto;
-    }
-}
-
-@media (max-width: 600px) {
-    button,
-    .nav-link,
-    input,
-    select {
-        touch-action: manipulation;
-    }
-
-    .modal input,
-    .modal select {
-        font-size: 16px;
-    }
-}
