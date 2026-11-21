@@ -1,6 +1,8 @@
 
 # BalanceBug — Monthly Budget Tracker
 
+https://balancebug.netlify.app
+
 > Take control of your money. Build better financial habits.
 
 BalanceBug is a personal monthly budget tracker designed to help users manage their finances using the **50/30/20 budgeting rule**. The goal is to make budgeting simple, organized, and accessible while helping users understand where their money goes.
